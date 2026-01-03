@@ -1,0 +1,23 @@
+name: Lab6-Automation-CI
+on: [push]
+
+jobs:
+  lab6-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.12'
+
+      - name: Install Dependencies
+        run: |
+          pip install pylint black pytest pandas numpy
+
+      - name: Run Python Linting
+        run: |
+          cd Lab6Files4Python
+          python3 -m pylint --disable=R,C testlint.py
